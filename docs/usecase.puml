@@ -3,29 +3,27 @@ left to right direction
 skinparam packageStyle rectangle
 
 actor "Khách hàng" as KH
-actor "Người quản trị" as QT[span_8](start_span)[span_8](end_span)
+actor "Người quản trị" as QT
 
 rectangle "Hệ thống bán hàng" {
-    usecase "UC1: Xem danh sách sản phẩm" as UC1[span_9](start_span)[span_9](end_span)
-    usecase "UC2: Xem chi tiết sản phẩm" as UC2[span_10](start_span)[span_10](end_span)
-    usecase "UC3: Thêm vào giỏ hàng" as UC3[span_11](start_span)[span_11](end_span)
-    usecase "UC4: Tìm kiếm nâng cao" as UC_Search ' Thêm mới
-    usecase "UC5: Đăng nhập" as UC5[span_12](start_span)[span_12](end_span)
-    usecase "UC6: Thanh toán giỏ hàng" as UC6[span_13](start_span)[span_13](end_span)
-    usecase "UC7: Quản lý sản phẩm" as UC7 ' Sửa từ UC9
+    usecase "UC1: Xem danh sách sản phẩm" as UC1
+    usecase "UC2: Xem chi tiết sản phẩm" as UC2
+    usecase "UC3: Thêm vào giỏ hàng" as UC3
+    usecase "UC4: Tìm kiếm nâng cao" as UC_Search
+    usecase "UC5: Đăng nhập" as UC5
+    usecase "UC6: Thanh toán giỏ hàng" as UC6
+    usecase "UC7: Quản lý sản phẩm" as UC7
 }
 
-' Nối vai trò với chức năng
-KH --> UC1[span_14](start_span)[span_14](end_span)
-KH --> UC2[span_15](start_span)[span_15](end_span)
-KH --> UC3[span_16](start_span)[span_16](end_span)
+KH --> UC1
+KH --> UC2
+KH --> UC3
 KH --> UC_Search
-KH --> UC6[span_17](start_span)[span_17](end_span)
+KH --> UC6
 
-QT --> UC5[span_18](start_span)[span_18](end_span)
+QT --> UC5
 QT --> UC7
 
-' Quan hệ include / extend
-UC6 ..> UC5 : <<include>>[span_19](start_span)[span_19](end_span)
-UC_Search ..> UC1 : <<extend>> ' Tìm kiếm là mở rộng của xem danh sách
+UC6 ..> UC5 : <<include>>
+UC_Search ..> UC1 : <<extend>>
 @enduml
