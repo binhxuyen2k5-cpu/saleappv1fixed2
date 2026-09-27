@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách sản phẩm - SaleAppV1</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments :: header(${categories}, ${selectedCategoryId})}"></div>
+
+<div class="container">
+
+    <p class="breadcrumb">
+        <a th:href="@{/}">Trang chủ</a> /
+        <span th:text="${selectedCategoryName != null ? selectedCategoryName : 'Tất cả sản phẩm'}">Tất cả sản phẩm</span>
+    </p>
+
+    <form class="filter-bar" method="get" th:action="@{/products}">
+        <div class="field">
+            <label for="categoryId">Danh mục</label>
+            <select id="categoryId" name="categoryId">
+                <option value="">-- Tất cả --</option>
+                <option th:each="cat : ${categories}"
+                        th:value="${cat.id}"
+                        th:text="${cat.name}"
+                        th:selected="${selectedCategoryId != null and selectedCategoryId == cat.id}">
+                </option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="keyword">Tên sản phẩm</label>
+            <input type="text" id="keyword" name="keyword" placeholder="Nhập từ khoá..."
+                   th:value="${keyword}">
+        </div>
+
+        <div class="field">
+            <label for="fromPrice">Giá từ</label>
+            <input type="text" inputmode="numeric" id="fromPrice" name="fromPrice" class="price-input"
+                   placeholder="VD: 1.000.000" th:value="${fromPrice}">
+        </div>
+
+        <div class="field">
+            <label for="toPrice">Giá đến</label>
+            <input type="text" inputmode="numeric" id="toPrice" name="toPrice" class="price-input"
+                   placeholder="VD: 20.000.000" th:value="${toPrice}">
+        </div>
+
+        <div class="field">
+            <label for="sort">Sắp xếp</label>
+            <select id="sort" name="sort">
+                <option value="" th:selected="${sort == null or sort == ''}">Mặc định</option>
+                <option value="priceAsc" th:selected="${sort == 'priceAsc'}">Giá thấp đến cao</option>
+                <option value="priceDesc" th:selected="${sort == 'priceDesc'}">Giá cao đến thấp</option>
+                <option value="bestseller" th:selected="${sort == 'bestseller'}">Bán chạy nhất</option>
+            </select>
+        </div>
+
+        <button type="submit">Lọc / Tìm kiếm</button>
+    </form>
+
+    <div class="product-grid" th:if="${!products.isEmpty()}">
+        <a class="product-card" th:each="p : ${products}" th:href="@{/products/{id}(id=${p.id})}">
+            <div class="thumb">
+                <img th:src="${p.image}" th:alt="${p.name}">
+                <span class="badge-discount" th:if="${p.onSale}" th:text="'-' + ${p.discountPercent} + '%'">-10%</span>
+                <span class="badge-outofstock" th:if="${p.outOfStock}">Hết hàng</span>
+            </div>
+            <div class="product-info">
+                <span class="brand" th:text="${p.brand}">Thương hiệu</span>
+                <h3 th:text="${p.name}">Tên sản phẩm</h3>
+                <p class="desc" th:text="${p.description}">Mô tả</p>
+                <div class="rating-row">
+                    <span class="rating" th:text="'⭐ ' + ${#numbers.formatDecimal(p.rating, 1, 1)}">4.5</span>
+                    <span class="sold" th:text="'Đã bán ' + ${p.sold}">Đã bán</span>
+                </div>
+                <div class="price-row">
+                    <p class="price" th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá</p>
+                    <p class="original-price" th:if="${p.onSale}"
+                       th:text="${#numbers.formatDecimal(p.originalPrice, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá gốc</p>
+                </div>
+                <span class="badge-installment" th:if="${p.price >= 5000000}">Trả góp 0%</span>
+            </div>
+        </a>
+    </div>
+
+    <p class="empty-msg" th:if="${products.isEmpty()}">
+        Không tìm thấy sản phẩm phù hợp.
+    </p>
+
+    <nav class="pagination" th:if="${totalPages > 1}">
+        <a th:href="@{/products(categoryId=${selectedCategoryId}, keyword=${keyword}, fromPrice=${fromPrice}, toPrice=${toPrice}, sort=${sort}, page=${currentPage - 1}, size=${pageSize})}"
+           th:classappend="${currentPage == 1} ? 'disabled'">&laquo; Trước</a>
+
+        <a th:each="i : ${#numbers.sequence(1, totalPages)}"
+           th:href="@{/products(categoryId=${selectedCategoryId}, keyword=${keyword}, fromPrice=${fromPrice}, toPrice=${toPrice}, sort=${sort}, page=${i}, size=${pageSize})}"
+           th:text="${i}"
+           th:classappend="${i == currentPage} ? 'active'">1</a>
+
+        <a th:href="@{/products(categoryId=${selectedCategoryId}, keyword=${keyword}, fromPrice=${fromPrice}, toPrice=${toPrice}, sort=${sort}, page=${currentPage + 1}, size=${pageSize})}"
+           th:classappend="${currentPage == totalPages} ? 'disabled'">Sau &raquo;</a>
+    </nav>
+
+    <p class="result-count" th:if="${totalItems > 0}"
+       th:text="'Tổng cộng ' + ${totalItems} + ' sản phẩm — Trang ' + ${currentPage} + '/' + ${totalPages}">
+        Tổng cộng
+    </p>
+
+</div>
+
+<div th:replace="~{fragments :: footer}"></div>
+
+<script>
+    // Tu dong them dau cham ngan cach hang nghin khi nguoi dung go gia,
+    // giup nhap "5.000.000" de doc nhu mot trang ban hang thuc su.
+    document.querySelectorAll('.price-input').forEach(function (input) {
+        input.addEventListener('input', function () {
+            var digits = input.value.replace(/[^0-9]/g, '');
+            input.value = digits.length ? digits.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';
+        });
+    });
+</script>
+
+</body>
+</html>

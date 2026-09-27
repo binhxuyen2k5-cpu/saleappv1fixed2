@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${product.name} + ' - Chi tiết sản phẩm'">Chi tiết sản phẩm</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments :: header(${categories}, ${selectedCategoryId})}"></div>
+
+<div class="container">
+
+    <p class="breadcrumb">
+        <a th:href="@{/}">Trang chủ</a> /
+        <a th:href="@{/products(categoryId=${product.categoryId})}" th:text="${categoryName}">Danh mục</a> /
+        <span th:text="${product.name}">Tên sản phẩm</span>
+    </p>
+
+    <a class="back-link" th:href="@{/products}">&larr; Quay lại danh sách sản phẩm</a>
+
+    <div class="detail-card">
+        <div class="thumb">
+            <img th:src="${product.image}" th:alt="${product.name}">
+            <span class="badge-discount" th:if="${product.onSale}" th:text="'-' + ${product.discountPercent} + '%'">-10%</span>
+        </div>
+        <div class="detail-info">
+            <span class="category-tag" th:text="${categoryName}">Danh mục</span>
+            <span class="brand" th:text="${product.brand}">Thương hiệu</span>
+            <h2 th:text="${product.name}">Tên sản phẩm</h2>
+
+            <div class="rating-row">
+                <span class="rating" th:text="'⭐ ' + ${#numbers.formatDecimal(product.rating, 1, 1)} + ' / 5'">4.5</span>
+                <span class="sold" th:text="'Đã bán ' + ${product.sold}">Đã bán</span>
+                <span class="stock-info"
+                      th:text="${product.outOfStock} ? 'Hết hàng' : ('Còn ' + ${product.stock} + ' sản phẩm')">Còn hàng</span>
+            </div>
+
+            <p th:text="${product.description}">Mô tả sản phẩm</p>
+
+            <div class="price-row">
+                <p class="price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá</p>
+                <p class="original-price" th:if="${product.onSale}"
+                   th:text="${#numbers.formatDecimal(product.originalPrice, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá gốc</p>
+            </div>
+
+            <span class="badge-installment" th:if="${product.price >= 5000000}">💳 Trả góp 0% qua thẻ tín dụng</span>
+
+            <table class="specs-table" th:if="${not #maps.isEmpty(product.specs)}">
+                <tbody>
+                    <tr th:each="entry : ${product.specs}">
+                        <td th:text="${entry.key}">Thông số</td>
+                        <td th:text="${entry.value}">Giá trị</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="~{fragments :: footer}"></div>
+
+</body>
+</html>

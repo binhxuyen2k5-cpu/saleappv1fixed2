@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SaleAppV1 - Bán hàng trực tuyến</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments :: header(${categories}, ${selectedCategoryId})}"></div>
+
+<div class="hero-banner">
+    <h2>Ưu đãi cực sốc — Giảm đến 20%</h2>
+    <p>Điện thoại, máy tính bảng chính hãng — Trả góp 0% — Giao hàng toàn quốc</p>
+    <a class="hero-cta" th:href="@{/products}">Mua sắm ngay →</a>
+</div>
+
+<div class="container">
+
+    <h2 class="section-title" th:if="${!featuredProducts.isEmpty()}">🔥 Sản phẩm bán chạy</h2>
+    <div class="product-grid" th:if="${!featuredProducts.isEmpty()}">
+        <a class="product-card" th:each="p : ${featuredProducts}" th:href="@{/products/{id}(id=${p.id})}">
+            <div class="thumb">
+                <img th:src="${p.image}" th:alt="${p.name}">
+                <span class="badge-discount" th:if="${p.onSale}" th:text="'-' + ${p.discountPercent} + '%'">-10%</span>
+                <span class="badge-outofstock" th:if="${p.outOfStock}">Hết hàng</span>
+            </div>
+            <div class="product-info">
+                <span class="brand" th:text="${p.brand}">Thương hiệu</span>
+                <h3 th:text="${p.name}">Tên sản phẩm</h3>
+                <div class="rating-row">
+                    <span class="rating" th:text="'⭐ ' + ${#numbers.formatDecimal(p.rating, 1, 1)}">4.5</span>
+                    <span class="sold" th:text="'Đã bán ' + ${p.sold}">Đã bán</span>
+                </div>
+                <div class="price-row">
+                    <p class="price" th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá</p>
+                    <p class="original-price" th:if="${p.onSale}"
+                       th:text="${#numbers.formatDecimal(p.originalPrice, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá gốc</p>
+                </div>
+                <span class="badge-installment" th:if="${p.price >= 5000000}">Trả góp 0%</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="category-cards">
+        <a class="category-card" th:each="cat : ${categories}" th:href="@{/products(categoryId=${cat.id})}">
+            <span class="category-icon" th:text="${cat.id == 1 ? '📱' : '💻'}">📦</span>
+            <span th:text="${cat.name}">Danh mục</span>
+        </a>
+    </div>
+
+</div>
+
+<div th:replace="~{fragments :: footer}"></div>
+
+</body>
+</html>

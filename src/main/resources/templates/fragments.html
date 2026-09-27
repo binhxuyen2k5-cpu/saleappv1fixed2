@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- Header dung chung: logo, o tim kiem, hotline, thanh danh muc -->
+<header th:fragment="header(categories, selectedCategoryId)">
+    <div class="top-bar">
+        <div class="top-bar-inner">
+            <a class="logo" th:href="@{/}">🛒 SaleAppV1</a>
+
+            <form class="header-search" method="get" th:action="@{/products}">
+                <input type="text" name="keyword" placeholder="Bạn muốn mua gì hôm nay?">
+                <button type="submit" aria-label="Tìm kiếm">🔍</button>
+            </form>
+
+            <div class="hotline">
+                <span>📞 Hotline mua hàng</span>
+                <strong>1900 1234</strong>
+            </div>
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <a th:href="@{/products}"
+           th:classappend="${selectedCategoryId == null} ? 'active' : ''">🏷️ Tất cả</a>
+        <a th:each="cat : ${categories}"
+           th:href="@{/products(categoryId=${cat.id})}"
+           th:classappend="${selectedCategoryId != null and selectedCategoryId == cat.id} ? 'active' : ''"
+           th:text="${(cat.id == 1 ? '📱 ' : '💻 ')} + ${cat.name}">Danh mục</a>
+    </nav>
+</header>
+
+<!-- Footer dung chung: nhieu cot thong tin nhu trang thuong mai dien tu -->
+<footer th:fragment="footer">
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h4>SaleAppV1</h4>
+            <p>Ứng dụng bán hàng trực tuyến demo — Bài thực hành Java Spring Boot (Spring MVC + Thymeleaf).</p>
+        </div>
+        <div class="footer-col">
+            <h4>Chính sách</h4>
+            <p>Chính sách bảo hành</p>
+            <p>Chính sách đổi trả</p>
+            <p>Chính sách giao hàng</p>
+        </div>
+        <div class="footer-col">
+            <h4>Hỗ trợ khách hàng</h4>
+            <p>Hotline: 1900 1234</p>
+            <p>Email: support@saleappv1.local</p>
+            <p>Giờ làm việc: 8:00 - 21:00</p>
+        </div>
+        <div class="footer-col">
+            <h4>Kết nối với chúng tôi</h4>
+            <p>Facebook · Zalo · YouTube</p>
+        </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 saleappv1 - Bài thực hành Java Spring Boot</div>
+</footer>
+
+</body>
+</html>

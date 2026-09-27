@@ -1,0 +1,169 @@
+[
+  {
+    "id": 1,
+    "name": "iPhone 15",
+    "description": "Điện thoại Apple iPhone 15, màn hình 6.1 inch, chip A16 Bionic, camera kép 48MP.",
+    "brand": "Apple",
+    "price": 19990000,
+    "originalPrice": 21990000,
+    "image": "/images/iphone-15.jpg",
+    "categoryId": 1,
+    "stock": 25,
+    "sold": 340,
+    "rating": 4.8,
+    "specs": {
+      "Màn hình": "6.1 inch Super Retina XDR",
+      "Chip": "Apple A16 Bionic",
+      "RAM": "6 GB",
+      "Bộ nhớ trong": "128 GB",
+      "Camera sau": "48MP + 12MP",
+      "Pin": "3349 mAh"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Samsung Galaxy S24",
+    "description": "Samsung Galaxy S24, màn hình Dynamic AMOLED 6.2 inch, chip Snapdragon 8 Gen 3.",
+    "brand": "Samsung",
+    "price": 18990000,
+    "originalPrice": null,
+    "image": "/images/galaxy-s24.jpg",
+    "categoryId": 1,
+    "stock": 18,
+    "sold": 210,
+    "rating": 4.7,
+    "specs": {
+      "Màn hình": "6.2 inch Dynamic AMOLED 2X",
+      "Chip": "Snapdragon 8 Gen 3",
+      "RAM": "8 GB",
+      "Bộ nhớ trong": "256 GB",
+      "Camera sau": "50MP + 12MP + 10MP",
+      "Pin": "4000 mAh"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Xiaomi Redmi Note 13",
+    "description": "Xiaomi Redmi Note 13, pin 5000mAh, sạc nhanh 33W, camera chính 108MP.",
+    "brand": "Xiaomi",
+    "price": 4990000,
+    "originalPrice": 5490000,
+    "image": "/images/redmi-note-13.jpg",
+    "categoryId": 1,
+    "stock": 40,
+    "sold": 512,
+    "rating": 4.5,
+    "specs": {
+      "Màn hình": "6.67 inch AMOLED",
+      "Chip": "Snapdragon 685",
+      "RAM": "8 GB",
+      "Bộ nhớ trong": "128 GB",
+      "Camera sau": "108MP",
+      "Pin": "5000 mAh, sạc nhanh 33W"
+    }
+  },
+  {
+    "id": 4,
+    "name": "OPPO Reno 11",
+    "description": "OPPO Reno 11, thiết kế mỏng nhẹ, camera chân dung AI, màn hình AMOLED 6.7 inch.",
+    "brand": "OPPO",
+    "price": 9990000,
+    "originalPrice": null,
+    "image": "/images/oppo-reno-11.jpg",
+    "categoryId": 1,
+    "stock": 22,
+    "sold": 156,
+    "rating": 4.4,
+    "specs": {
+      "Màn hình": "6.7 inch AMOLED",
+      "Chip": "MediaTek Dimensity 7050",
+      "RAM": "8 GB",
+      "Bộ nhớ trong": "256 GB",
+      "Camera sau": "100MP",
+      "Pin": "4800 mAh"
+    }
+  },
+  {
+    "id": 5,
+    "name": "iPad Air 5",
+    "description": "Máy tính bảng Apple iPad Air 5, chip M1, màn hình Liquid Retina 10.9 inch.",
+    "brand": "Apple",
+    "price": 15990000,
+    "originalPrice": 17990000,
+    "image": "/images/ipad-air-5.jpg",
+    "categoryId": 2,
+    "stock": 15,
+    "sold": 98,
+    "rating": 4.9,
+    "specs": {
+      "Màn hình": "10.9 inch Liquid Retina",
+      "Chip": "Apple M1",
+      "RAM": "8 GB",
+      "Bộ nhớ trong": "64 GB",
+      "Kết nối": "Wi-Fi",
+      "Pin": "Lên đến 10 giờ sử dụng"
+    }
+  },
+  {
+    "id": 6,
+    "name": "Samsung Galaxy Tab S9",
+    "description": "Samsung Galaxy Tab S9, màn hình Dynamic AMOLED 2X 11 inch, kèm bút S Pen.",
+    "brand": "Samsung",
+    "price": 17990000,
+    "originalPrice": null,
+    "image": "/images/galaxy-tab-s9.jpg",
+    "categoryId": 2,
+    "stock": 12,
+    "sold": 74,
+    "rating": 4.6,
+    "specs": {
+      "Màn hình": "11 inch Dynamic AMOLED 2X",
+      "Chip": "Snapdragon 8 Gen 2",
+      "RAM": "8 GB",
+      "Bộ nhớ trong": "128 GB",
+      "Phụ kiện": "Kèm bút S Pen",
+      "Pin": "8400 mAh"
+    }
+  },
+  {
+    "id": 7,
+    "name": "Xiaomi Pad 6",
+    "description": "Xiaomi Pad 6, màn hình 11 inch 144Hz, hiệu năng mạnh mẽ cho học tập và giải trí.",
+    "brand": "Xiaomi",
+    "price": 7990000,
+    "originalPrice": 8990000,
+    "image": "/images/xiaomi-pad-6.jpg",
+    "categoryId": 2,
+    "stock": 30,
+    "sold": 187,
+    "rating": 4.5,
+    "specs": {
+      "Màn hình": "11 inch, 144Hz",
+      "Chip": "Snapdragon 870",
+      "RAM": "8 GB",
+      "Bộ nhớ trong": "128 GB",
+      "Pin": "8840 mAh"
+    }
+  },
+  {
+    "id": 8,
+    "name": "Lenovo Tab P11",
+    "description": "Lenovo Tab P11, pin dung lượng lớn, 4 loa Dolby Atmos, phù hợp giải trí đa phương tiện.",
+    "brand": "Lenovo",
+    "price": 5990000,
+    "originalPrice": null,
+    "image": "/images/lenovo-tab-p11.jpg",
+    "categoryId": 2,
+    "stock": 20,
+    "sold": 65,
+    "rating": 4.2,
+    "specs": {
+      "Màn hình": "11 inch 2K",
+      "Chip": "MediaTek Helio G99",
+      "RAM": "6 GB",
+      "Bộ nhớ trong": "128 GB",
+      "Loa": "4 loa Dolby Atmos",
+      "Pin": "7700 mAh"
+    }
+  }
+]

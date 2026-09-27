@@ -1,0 +1,37 @@
+@startuml UseCase_SaleAppV1
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Khách hàng" as KH
+actor "Người quản trị" as QT
+
+rectangle "Hệ thống bán hàng trực tuyến" {
+  usecase "Xem danh sách sản phẩm\n(phân trang, lọc theo danh mục/tên/giá)" as UC1
+  usecase "Xem chi tiết sản phẩm" as UC2
+  usecase "Thêm sản phẩm vào giỏ hàng" as UC3
+  usecase "Xem/Cập nhật/Xoá giỏ hàng" as UC4
+  usecase "Đăng nhập" as UC5
+  usecase "Thanh toán giỏ hàng\n(trực tuyến / khi nhận hàng)" as UC6
+  usecase "Nhận email chi tiết đơn hàng" as UC7
+  usecase "Xuất giỏ hàng ra CSV" as UC8
+
+  usecase "Quản lý (Thêm/Sửa/Xoá) thực thể" as UC9
+  usecase "Xuất dữ liệu ra CSV" as UC10
+  usecase "Xem báo cáo doanh thu\n(biểu đồ Chart.js/Google Charts)" as UC11
+}
+
+KH --> UC1
+KH --> UC2
+KH --> UC3
+KH --> UC4
+KH --> UC6
+KH --> UC8
+UC6 ..> UC5 : <<include>>
+UC6 ..> UC7 : <<include>>
+UC3 ..> UC2 : <<extend>>
+
+QT --> UC9
+QT --> UC10
+QT --> UC11
+
+@enduml
